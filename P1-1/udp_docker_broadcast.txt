@@ -1,0 +1,16 @@
+# Ejercicio 7 - Docker UDP Broadcast
+
+
+docker network create pruebas
+
+#  Lanzamos los tres contenedores con el servidor udp_servidor6_broadcast.py
+docker run -d --name servidor1 --network pruebas -v "$(pwd)":/app python:3.7 python3 /app/udp_servidor6_broadcast.py
+docker run -d --name servidor2 --network pruebas -v "$(pwd)":/app python:3.7 python3 /app/udp_servidor6_broadcast.py
+docker run -d --name servidor3 --network pruebas -v "$(pwd)":/app python:3.7 python3 /app/udp_servidor6_broadcast.py
+
+#  Verificamos que los servidores están activos
+docker ps
+
+#  Lanzamos el cliente udp_cliente6_broadcast.py usando la dirección de broadcast averiguada (172.18.255.255) y el puerto 12345
+docker run -it --network pruebas -v "$(pwd)":/app python:3.7 python3 /app/udp_cliente6_broadcast.py 172.18.255.255 12345
+
