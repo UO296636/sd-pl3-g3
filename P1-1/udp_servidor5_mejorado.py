@@ -20,9 +20,7 @@ while True:
         mensaje = data.decode()
         print(f"Mensaje recibido: {mensaje} desde {addr}")
 
-        # Se asume que el datagrama tiene el formato "id: mensaje"
         partes = mensaje.split(":", 1)
         if len(partes) > 1:
             identificador = partes[0].strip()
-            # El servidor responde con el mismo identificador + OK
             sock.sendto(f"{identificador}: OK".encode(), addr)

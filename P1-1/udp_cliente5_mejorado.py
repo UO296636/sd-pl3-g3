@@ -27,7 +27,6 @@ while True:
         respuesta = data.decode()
         print(f"Confirmación recibida: {respuesta}")
 
-        # Verificamos que el identificador coincide
         if not respuesta.startswith(str(contador)):
             print("Confirmación recibida no corresponde al mensaje enviado")
     except socket.timeout:

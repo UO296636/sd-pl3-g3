@@ -1,7 +1,6 @@
 import socket
 import sys
 
-# Puerto desde la línea de comandos o 9999 por defecto
 puerto = int(sys.argv[1]) if len(sys.argv) >= 2 else 9999
 TAM = 5
 
@@ -13,20 +12,17 @@ def recvall(sock, n: int) -> str | None:
     """
     datos = bytearray()
     while len(datos) < n:
-        # Leer solo lo que falta
         bloque = sock.recv(n - len(datos))
-        if not bloque:  # conexión cerrada prematuramente
+        if not bloque:  
             return None
         datos.extend(bloque)
     return datos.decode("ascii")
 
-# Crear socket de escucha
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(("", puerto))
 s.listen(5)
 print(f"Servidor escuchando en el puerto {puerto}...")
 
-# Bucle principal de espera de clientes
 while True:
     print("Esperando un cliente")
     sd, origen = s.accept()

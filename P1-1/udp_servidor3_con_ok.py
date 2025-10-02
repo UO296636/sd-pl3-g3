@@ -18,5 +18,4 @@ while True:
         print("Simulando paquete perdido")
     else:
         print(f"Mensaje recibido: {data.decode()} desde {addr}")
-        # Enviar respuesta de confirmación
         sock.sendto("OK".encode(), addr)
