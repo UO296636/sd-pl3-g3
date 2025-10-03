@@ -8,11 +8,17 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as c:
     c.connect((host, puerto))
     print(f"Conectado a {host}:{puerto}")
 
-    for i in range(5):
-        c.sendall(b"ABCDE")   
-        print(f"Enviado {i+1}: ABCDE")
+    lineas = [
+        b"Primera linea\r\n",
+        b"Segunda linea\r\n",
+        b"Tercera linea\r\n"
+    ]
 
-    c.sendall(b"FINAL")
-    print("Enviado: FINAL")
+    for linea in lineas:
+        print(f"Enviando: {repr(linea)}")
+        c.sendall(linea)
+
+        respuesta = c.recv(1024)
+        print(f"Recibido: {repr(respuesta)}")
 
 print("Cliente terminado")

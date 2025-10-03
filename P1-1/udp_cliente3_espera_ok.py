@@ -10,7 +10,7 @@ if len(sys.argv) > 2:
     puerto = int(sys.argv[2])
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.settimeout(2.0)  # tiempo máximo de espera en segundos
+sock.settimeout(2.0)
 
 print(f"Cliente UDP con espera de OK hacia {host}:{puerto}...")
 contador = 1
@@ -27,6 +27,6 @@ while True:
         data, _ = sock.recvfrom(1024)
         print(f"Confirmación recibida: {data.decode()}")
     except socket.timeout:
-        print("⚠️ No se recibió confirmación (posible pérdida de paquete)")
+        print("No se recibió confirmación (posible pérdida de paquete)")
 
 sock.close()

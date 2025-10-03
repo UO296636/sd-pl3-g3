@@ -31,7 +31,7 @@ while True:
             break
         except socket.timeout:
             intentos += 1
-            print(f"⚠️ Timeout (intento {intentos}, espera {timeout:.1f}s)")
+            print(f"Timeout (intento {intentos}, espera {timeout:.1f}s)")
 
             timeout *= 2
             if timeout > 2.0:
